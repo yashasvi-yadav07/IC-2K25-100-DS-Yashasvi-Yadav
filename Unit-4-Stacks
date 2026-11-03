@@ -1,0 +1,16 @@
+# Unit 4 - Stacks
+
+Data Structures Lab
+
+## Basic Programs:
+
+1. Static Stack Implementation
+2. Dynamic Stack Implementation
+3. Infix to Postfix Conversion
+4. Infix to Prefix Conversion
+5. Expression Evaluation
+
+## Applications:
+
+1. Expression Evaluator
+2. Undo/Redo Feature Using Stack
