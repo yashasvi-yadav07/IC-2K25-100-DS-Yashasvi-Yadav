@@ -1,0 +1,17 @@
+# Unit 5 - Queues
+
+Data Structures Lab
+
+## Basic Programs:
+
+1. Static Queue Implementation
+2. Dynamic Queue Implementation
+3. Circular Queue
+4. Deque Implementation
+5. Priority Queue Using Array
+6. Priority Queue Using Heap
+
+## Applications:
+
+1. OS Process Scheduling Simulation
+2. Customer Service Queue Simulation
