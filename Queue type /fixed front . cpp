@@ -1,0 +1,77 @@
+// fixed front queue that is simple
+#include <iostream>
+using namespace std;
+class queue{
+    private:
+    int* arr;
+    int front, rear, capacity;
+    public:
+    queue(int cap){
+        capacity= cap;
+        arr= new int[capacity];
+        front =0;
+        rear= -1;
+    }
+    void enqueue(int x){
+        if(full())
+            cout<<"Overflow"<<endl;
+        else
+            rear++;
+        arr[rear]= x;
+       cout<<x<<" is entered in queue"<<endl;
+    }
+    void dequeue(){
+        if(empty())
+            cout<<"Underflow"<<endl;
+        else 
+        for(int i=front+1; i<=rear;i++)
+            arr[i-1]=arr[i];
+        rear--;
+    }
+    bool empty(){
+        if(rear==-1){
+            cout<<"queue is empty"<<endl;
+            return true;
+        }
+        return false;
+    }
+    bool full(){
+        if(rear==capacity-1){
+            cout<<"queue is full"<<endl;
+            return true;
+        }
+        return false;
+    }
+    void front_element(){
+        if(empty()){
+            cout<<"underflow";
+        }
+        cout<<"the front is "<<arr[front];
+    }
+    void display(){
+        if(empty()){
+            cout<<"underflow";
+        }
+        cout<<"the queue is ";
+        for (int i = front; i <= rear; i++) {
+            cout<<arr[i] << " ";
+        }
+        cout << endl;
+    }
+
+    ~queue() {
+        delete[] arr;
+    }
+};
+int main(){
+    queue q(4);
+    q.enqueue(21);
+    q.enqueue(22);
+    q.enqueue(31);
+    q.enqueue(111);
+    q.full();
+    q.dequeue();
+    q.empty();
+    q.display();
+    return 0;
+}
