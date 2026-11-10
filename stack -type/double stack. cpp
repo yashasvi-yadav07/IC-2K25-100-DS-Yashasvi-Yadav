@@ -1,0 +1,151 @@
+// doube stack from one array
+#include <iostream>
+using namespace std;
+class myStack{
+    private:
+    int *arr;
+    int capacity, top1, top2;
+    public:
+    // its constructor
+    myStack(int cap){
+        capacity = cap;
+        arr= new int[capacity];
+        top1= -1;
+        top2= capacity;
+    }
+
+//     bool isempty() {
+//     if (top1 == -1 && top2==capacity) {
+//         cout << "stack is empty\n";
+//         return true;
+//     }
+//     return false;
+// }
+    bool isempty1() {
+    if (top1 == -1 ) {
+        cout << "stack is empty\n";
+        return true;
+    }
+    return false;
+}
+    bool isempty2() {
+    if (top2==capacity) {
+        cout << "stack is empty\n";
+        return true;
+    }
+    return false;
+}
+    // bool isfull(){
+    //     if (top1+1== top2 && top2-1==top1) {
+    //     cout << "stack is full\n";
+    //     return true;
+    // }
+    // return false;
+    // }
+     bool isfull1(){
+        if (top1+1 == top2) {
+        cout << "stack is full\n";
+        return true;
+    }
+    return false;
+    } 
+    bool isfull2(){
+        if (top2-1 == top1){
+        cout << "stack is full\n";
+        return true;
+    }
+    return false;
+    }
+    // push then pop
+    void push1(int x){
+       if (isfull1()){ 
+           cout<<"overflow stack\n";
+           return;
+        }
+       arr[++top1]= x;
+       cout<<x<<" is entered in stack\n";
+    }
+     void push2(int x){
+       if (isfull2()){ 
+           cout<<"overflow stack\n";
+           return;
+        }
+       arr[--top2]= x;
+       cout<<x<<" is entered in stack\n";
+    }
+
+    void pop1(){
+        if (isempty1()){
+            cout<<"underflow stack\n";
+        }
+        else{
+            top1--;
+        cout<<"poped 1 \n";
+    }
+    }
+    void pop2(){
+        if (isempty2()){
+            cout<<"underflow stack\n";
+        }
+        else{
+            top2++;
+        cout<<"poped 2\n";
+    }
+    }
+    // peek
+    int peek1(){
+        if (isempty1()){
+            cout<<"underflow stack\n";
+            return -1;
+        }  
+        cout<<"the top is \n";
+        return arr[top1];
+    }
+     int peek2(){
+        if (isempty2()){
+            cout<<"underflow stack\n";
+            return -1;
+        }  
+        cout<<"the top is \n";
+        return arr[top2];
+    }
+    // display
+void display(){
+    if (top1 == -1 && top2 == capacity){
+            cout<<"underflow stack\n";
+            return;
+        }
+else
+        {cout<<"\nthe stack is: ";
+    for(int i=0; i<=top1; i++){
+        cout<<arr[i]<<" ";}
+         cout<<endl;
+        for(int j=top2; j<capacity; j++){
+    cout<<arr[j]<<" ";}}}
+    // destructor
+~myStack(){
+    delete[] arr;
+}
+};
+    int main(){
+        myStack s(6);
+         s.push1(11);
+         s.push1(55);
+         s.push1(33);
+         s.pop1();
+         s.push1(77);
+         s.push1(99);                     
+         s.pop1();
+         s.push2(22);
+         s.push2(66);
+         s.pop2();
+         s.push2(44);
+        cout<<s.peek1()<<endl;
+        cout<<s.peek2()<<endl;
+        cout<<(s.isempty1()? "yes":"no")<<endl;
+        cout<<(s.isempty2()? "yes":"no")<<endl;
+        s.isfull1();
+        s.isfull2();
+        s.display();
+        return 0;
+}
