@@ -1,0 +1,94 @@
+// circular queue
+
+#include <iostream>
+using namespace std;
+class cir_queue{
+    private:
+    int* arr;
+    int front, rear, capacity, nf, nr;
+    public:
+    cir_queue(int cap){
+        capacity= cap;
+        arr= new int[capacity];
+        front =0;
+        rear= -1;
+}
+
+    int cal_nr(){
+        if(rear==capacity-1)
+        return 0;
+        else
+        return rear+1;
+    }
+    int cal_nf(){
+         if(front==capacity-1)
+            return 0;
+        else
+            return front+1;   
+    }
+    void enqueue(int x){
+        if(full()==0){
+         nr=int (cal_nr());
+        arr[nr]= x;
+        rear=nr;
+       cout<<x<<" is entered in queue"<<endl;}
+    }
+    void dequeue(){
+        if(empty()==0){
+        nf=int(cal_nf());
+        front=nf;}
+    }
+    bool empty(){
+        if (front==rear==capacity-1) {
+            cout<<"queue is empty"<<endl;
+            return true;
+        }
+        return false;
+    }
+    bool full(){
+         if (int(cal_nr()) == front && rear != -1) { 
+            cout<<"queue is full"<<endl;
+            return true;
+        }
+        return false;
+    }
+    void front_element(){
+        if(empty()==0)
+        cout<<"the front is "<<arr[front];
+    }
+    void display(){
+        if(empty()==0){
+        cout<<"the queue is ";
+            //imp circular loop now
+                int i = front; // starting from front
+        while (true) { //loop only continue if condition is true
+            cout << arr[i] << " ";
+            if (i == rear) break; //rear is the last element
+            if (i == capacity - 1) i = 0; //last element of array and now again from zero
+            else i++;
+        }
+        cout << endl;
+    }
+    }
+
+    ~cir_queue() {
+        delete[] arr;
+    }
+};
+int main(){
+    cir_queue q(4);
+    q.enqueue(21);
+    q.enqueue(22);
+    q.enqueue(31);
+    q.enqueue(111);
+    q.full();
+    q.dequeue();
+     q.display();
+    q.dequeue();
+    q.enqueue(55);
+    q.enqueue(26);
+    q.enqueue(28);
+    q.empty();
+    q.display();
+    return 0;
+}
