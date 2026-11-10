@@ -1,0 +1,79 @@
+// simple creation of four nodes for beginner level
+#include <iostream>
+using namespace std;
+
+// The Node class represents a single element
+class Node {
+public:
+    int data;
+    Node* next;
+
+    // Constructor to initialize a node with data and set next to NULL
+    Node(int val) {
+        data = val;
+        next = nullptr;
+    }
+};
+
+// 2. The LinkedList class manages the nodes and operations
+class LinkedList {
+private:
+    Node* head; 
+
+public:
+    // Constructor 
+    LinkedList() {
+        head = nullptr;
+    }
+
+    void createFourNodes() {
+        int val;
+
+        cout << "Enter data for Node 1: ";
+        cin >> val;
+        head = new Node(val); 
+
+        cout << "Enter data for Node 2: ";
+        cin >> val;
+        head->next = new Node(val);
+
+        cout << "Enter data for Node 3: ";
+        cin >> val;
+        head->next->next = new Node(val);
+
+        cout << "Enter data for Node 4: ";
+        cin >> val;
+        head->next->next->next = new Node(val);
+
+        // Node 4's 'next' is automatically set to nullptr by the Node constructor!
+    }
+
+    void printList() {
+        Node* temp = head; 
+
+        cout << "\nYour Linked List: " << endl;
+        while (temp != nullptr) {
+            cout << temp->data << " -> ";
+            temp = temp->next; 
+        }
+        cout << "NULL" << endl;
+    }
+
+    // Destructor
+    ~LinkedList() {
+        Node* current = head;
+        while (current != nullptr) {
+            Node* nextNode = current->next;
+            delete current; 
+            current = nextNode;
+        }
+    }
+};
+
+int main() {
+    LinkedList myList;
+
+    myList.createFourNodes();
+    myList.printList();
+
+    return 0; }
