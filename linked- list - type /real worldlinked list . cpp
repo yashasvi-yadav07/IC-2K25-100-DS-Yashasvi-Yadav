@@ -1,0 +1,86 @@
+// this is how the linked list is used
+// for sentences as info
+// (change ALL STRING TO INT TO GET NUMBERS AS INFO)
+#include <iostream>
+#include <string>
+using namespace std;
+// self referencial structure= a node
+struct Node {
+    string data;
+    Node* next;
+
+    Node(string val) {
+        data = val;
+        next = nullptr;
+    }
+};
+// real linked list ds
+class LinkedList {
+private:
+    Node* header; 
+
+public:
+    LinkedList() {
+        header = nullptr;
+    }
+// creating new nodes one after another
+    void insertAtEnd(string x) {
+        Node* p = new Node(x); // 1. Create the new node
+
+        // 2. If the list is empty, this new node becomes the head
+        if (header == nullptr) {
+            header = p;
+            return;
+        }
+
+        // 3. Otherwise, travel down the chain to find the current last node
+        Node* temp = header;
+        while (temp->next != nullptr) {
+            temp = temp->next;
+        }
+
+        // 4. Link the last node to your brand-new node
+        temp->next = p;
+    }
+// display
+    void printList() {
+        Node* temp = header;
+        cout << "\nFinal Linked List: \n";
+        while (temp != nullptr) {
+            cout << temp->data << " -> ";
+            temp = temp->next;
+        }
+        cout << "NULL" << endl;
+    }
+    ~LinkedList() {
+        Node* current = header;
+        while (current != nullptr) {
+            Node* nextNode = current->next;
+            delete current;
+            current = nextNode;
+        }
+    }
+};
+
+int main() {
+    LinkedList list;
+    char choice;
+    string value;
+ // Loop dynamically until the user wants to stop
+    do {
+        cout << "Enter the info to add to the list: ";
+         //  Use getline to safely capture full sentences with spaces
+        // cin >> ws clears out any leftover newline characters in the buffer
+        getline(cin >> ws, value); 
+
+        list.insertAtEnd(value); 
+
+        cout << "Do you want to add another node? (y/n), \"n\" for printing: ";
+        cin >> choice;
+    } while (choice == 'y' || choice == 'Y');
+
+    // Display the list when the user is done
+    list.printList();
+
+    return 0;
+}
